@@ -16,4 +16,4 @@ You can input multiple commands at the same time by dividing them with a ';', fo
 If the commands are found in the autoexec -file, they are updated with the values given as the inputs.
 
 ### Why?
-Just because I was too lazy to search and edit the autoexec manually every time I want to edit my config file.
+Because I was too lazy to search and edit the autoexec manually every time I want to edit my config file.
