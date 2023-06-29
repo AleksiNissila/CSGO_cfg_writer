@@ -1,6 +1,13 @@
 import re
 from pathlib import Path
 
+# SET YOUR CONFIG FILE LOCATION HERE INSIDE APOSHTROPHES
+# THIS FILE LOCATION COULD LOOK SOMETHING LIKE:
+# C:\Steam\steamapps\common\Counter-Strike Global Offensive\csgo\cfg
+# WHICH MEANS THE WHOLE ROW SHOULD LOOK SOMETHING LIKE:
+# path = r'C:\Steam\steamapps\common\Counter-Strike Global Offensive\csgo\cfg'
+path = r''
+
 def process_input_commands(config_file_path, temp_file_path, input_cmd_full):
     input_cmd_full = input_cmd_full.lower()
     input_split = re.findall(r"(\w+)\s+(-?\w+)", input_cmd_full)
@@ -33,7 +40,7 @@ def process_input_commands(config_file_path, temp_file_path, input_cmd_full):
         print("Some commands were found, but no changes were made")
 
 def main():
-    cfg_loc = Path(r'D:\Steam\steamapps\common\Counter-Strike Global Offensive\csgo\cfg')
+    cfg_loc = Path(path)
     if str(cfg_loc) == '.':
         print("Please set path before proceeding")
         exit()
