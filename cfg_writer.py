@@ -6,12 +6,14 @@ from pathlib import Path
 # C:\Steam\steamapps\common\Counter-Strike Global Offensive\csgo\cfg
 # WHICH MEANS THE WHOLE ROW SHOULD LOOK SOMETHING LIKE:
 # path = r'C:\Steam\steamapps\common\Counter-Strike Global Offensive\csgo\cfg'
-path = r''
+path = r'D:\Steam\steamapps\common\Counter-Strike Global Offensive\csgo\cfg'
 
 def process_input_commands(config_file_path, temp_file_path, input_cmd_full):
     input_cmd_full = input_cmd_full.lower()
-    input_split = re.findall(r"(\w+)\s+(-?\w+)", input_cmd_full)
+    input_split = re.findall(r"(\w+)\s+(-?\w+(?:\.\w+)?)", input_cmd_full)
     input_cmds, input_values = zip(*input_split)
+
+
 
     num_changed = 0
     val_not_changed = 0
