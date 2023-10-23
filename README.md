@@ -1,3 +1,5 @@
+Use at your own risk! Still contains a lot of bugs and oversights which could cause your config file unwanted changes.
+
 CSGO_cfg_writer
 
 This is a script for editing the autoexec -file for CS:GO. 
@@ -15,5 +17,3 @@ Input commands in the same way as you would into the CS:GO console, for example:
 You can input multiple commands at the same time by dividing them with a ';', for example: cl_crosshairstyle 1;cl_crosshaircolor 5
 If the commands are found in the autoexec -file, they are updated with the values given as the inputs.
 
-### Why?
-Because I am too lazy to search and edit the autoexec manually every time I want to edit my config file.
