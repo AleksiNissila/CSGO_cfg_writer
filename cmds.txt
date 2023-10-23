@@ -1,0 +1,7 @@
+cl_crosshaircolor
+cl_crosshairstyle
+cl_crosshairgap
+cl_crosshairthickness
+cl_crosshairdot
+sensitivity
+volume
