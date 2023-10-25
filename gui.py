@@ -21,7 +21,7 @@ class Gui:
         self.file_button = tk.Button(self.root, text="Select file location", command=self.get_folder_name, width=20)
 
         self.cmd_box = ttk.Combobox(self.root, width=25)
-        self.update_cmd_list()
+        self.update_cmd_combobox()
         self.cmd_box.bind("<Return>", self.process_input)
 
         self.ok_button = tk.Button(self.root, text="Ok", width=20)
@@ -74,7 +74,7 @@ class Gui:
         cfg_writer.process_input_commands(self.selected_folder, input_text, self.info_box, self)
         self.cmd_box.set('')
 
-    def update_cmd_list(self):
+    def update_cmd_combobox(self):
         """
         Function for adding new command to a list of commands
         :return: nothing

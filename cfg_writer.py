@@ -6,7 +6,7 @@ import gui
 
 # Get list of commands as a global variable
 with open("cmds.txt", "r") as cmds:
-    cmd_list = set(cmd.strip() for cmd in cmds)
+    cmd_list = sorted(set(cmd.strip() for cmd in cmds))
     cmds.close()
 def init_path():
     """
@@ -46,8 +46,11 @@ def update_cmd_list(cmds, app):
             cmd_list.add(cmd)
             print("command added to file")
             app.update_cmd_list()
+            # Sort the file if new commands get added
+            sort_cmds()
         else:
             print("command exists in file")
+    app.update_cmd_list()
 
 def get_cmd_list():
     """
@@ -136,6 +139,26 @@ def print_info(msg, info_box):
     """
     info_box.insert(tk.END, msg + '\n', 'black')
     info_box.see('end')
+
+def sort_cmds():
+    """
+    Function for sorting the commands in cmds.txt to alphabetical order
+    :return: nothing
+    """
+    rows = []
+    with open("cmds.txt", 'r') as file:
+        for line in file:
+            stripped = line.strip('\n')
+            rows.append(stripped)
+    file.close()
+    rows.sort()
+
+
+    with open("cmds.txt", 'w') as file:
+        for cmd in rows[1:]:
+            file.write(cmd + '\n')
+    file.close()
+
 
 def main():
     path = init_path()
