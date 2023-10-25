@@ -23,6 +23,7 @@ class Gui:
         self.cmd_box = ttk.Combobox(self.root, width=25)
         self.update_cmd_combobox()
         self.cmd_box.bind("<Return>", self.process_input)
+        self.cmd_box.bind("<KeyRelease>", self.check_cmd_input)
 
         self.ok_button = tk.Button(self.root, text="Ok", width=20)
         self.ok_button.bind("<Button>", self.process_input)
@@ -70,9 +71,12 @@ class Gui:
         :return: nothing
         """
         input_text = self.cmd_box.get()
-        self.add_text_to_info_box(input_text, 'black')
-        cfg_writer.process_input_commands(self.selected_folder, input_text, self.info_box, self)
-        self.cmd_box.set('')
+        if input_text:
+            self.add_text_to_info_box(input_text, 'black')
+            cfg_writer.process_input_commands(self.selected_folder, input_text, self.info_box, self)
+            self.cmd_box.set('')
+        else:
+            pass
 
     def update_cmd_combobox(self):
         """
@@ -80,3 +84,16 @@ class Gui:
         :return: nothing
         """
         self.cmd_box.configure(values=list(cfg_writer.cmd_list))
+
+    def check_cmd_input(self, event):
+        value = event.widget.get()
+
+        if value == '':
+            self.cmd_box.configure(values=list(cfg_writer.cmd_list))
+        else:
+            data = []
+            for item in list(cfg_writer.cmd_list):
+                if value.lower() in item.lower():
+                    data.append(item)
+
+            self.cmd_box.configure(values=data)

@@ -43,14 +43,14 @@ def update_cmd_list(cmds, app):
         if cmd not in cmd_list:
             with open("cmds.txt", "a+") as cmds:
                 cmds.write("\n" + cmd)
-            cmd_list.add(cmd)
+            cmd_list.append(cmd)
             print("command added to file")
-            app.update_cmd_list()
+            app.update_cmd_combobox()
             # Sort the file if new commands get added
             sort_cmds()
         else:
             print("command exists in file")
-    app.update_cmd_list()
+    app.update_cmd_combobox()
 
 def get_cmd_list():
     """
@@ -80,7 +80,13 @@ def process_input_commands(config_file_path, input_cmd_full, info_box, app):
     # split user input(s) to commands and values
     input_cmd_full = input_cmd_full.lower()
     input_split = re.findall(r"(\w+)\s+(-?\w+(?:\.\w+)?)", input_cmd_full)
-    input_cmds, input_values = zip(*input_split)
+    print(input_split)
+    try:
+        input_cmds, input_values = zip(*input_split)
+    except:
+        print_info("Bad input", info_box)
+        return
+
 
     num_changed = 0
     val_not_changed = 0
@@ -93,6 +99,7 @@ def process_input_commands(config_file_path, input_cmd_full, info_box, app):
                 command = line.lower().split()[0]
                 if command in input_cmds:
                     cmd_i = input_cmds.index(command)
+                    # If command is found in the file
                     # Edit cfg file to new value
                     if line.lower().split()[1] != input_values[cmd_i]:
                         line_old = line
@@ -100,6 +107,7 @@ def process_input_commands(config_file_path, input_cmd_full, info_box, app):
                         msg = 'Line Number: ' + str(line_number)
                         print_info(msg, info_box)
                         print_info(f"{line_old.strip()} changed to -> {line.strip()}\n", info_box)
+                        update_cmd_list(input_cmds, app)
 
                     else:
                         val_not_changed += 1
@@ -127,7 +135,7 @@ def process_input_commands(config_file_path, input_cmd_full, info_box, app):
     except Exception as e:
         print_info(f"Error occurred during file operations: {str(e)}", info_box)
 
-    update_cmd_list(input_cmds, app)
+
 
 
 def print_info(msg, info_box):
