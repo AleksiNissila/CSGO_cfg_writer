@@ -74,8 +74,13 @@ def process_input_commands(config_file_path, input_cmd_full, info_box, app):
 
     # initiate file locations
     cfg_loc = Path(config_file_path)
-    config_file_path = cfg_loc / 'autoexec.cfg'
-    temp_file_path = cfg_loc / 'autoexec_temp.cfg'
+
+    #config_file_path = cfg_loc / 'autoexec.cfg'
+    config_file_path = Path(config_file_path)
+    #temp_file_path = cfg_loc / 'temp_file.cfg'
+    temp_file_path = Path(config_file_path).parent / 'temp_file.cfg'
+    print("82 config_file_path: ", config_file_path)
+    print("83 temp_file_path: ", temp_file_path)
 
     # split user input(s) to commands and values
     input_cmd_full = input_cmd_full.lower()
@@ -121,8 +126,8 @@ def process_input_commands(config_file_path, input_cmd_full, info_box, app):
         print_info("Some commands were found, but no changes were made", info_box, app)
 
     # Rename files
-    backup_file_path = cfg_loc / 'autoexec_old.cfg'
-    temp_file_path = cfg_loc / 'autoexec_temp.cfg'
+    backup_file_path = Path(config_file_path).parent / 'autoexec_old.cfg'
+    temp_file_path = Path(config_file_path).parent / 'temp_file.cfg'
 
     try:
         # Backup the original file

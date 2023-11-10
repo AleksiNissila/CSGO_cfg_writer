@@ -18,7 +18,7 @@ class Gui:
         # Initialize the folder
         self.selected_folder = cfg_writer.init_path()
 
-        self.file_button = tk.Button(self.root, text="Select file location", command=self.get_folder_name, width=20)
+        self.file_button = tk.Button(self.root, text="Select file location", command=self.get_file_name, width=20)
 
         self.cmd_box = ttk.Combobox(self.root, width=25)
         self.update_cmd_combobox()
@@ -55,15 +55,15 @@ class Gui:
         self.info_box.config(state=DISABLED)
 
 
-    def get_folder_name(self):
+    def get_file_name(self):
         """
         Function for selecting cfg file location. Folder (which contains the cfg-file)
         is selected, hence the function name.
         :return: nothing
         """
-        self.selected_folder = tkinter.filedialog.askdirectory()
-        self.add_text_to_info_box(self.selected_folder, 'black')
-        cfg_writer.update_path(self.selected_folder)
+        self.selected_file = tkinter.filedialog.askopenfilename()
+        self.add_text_to_info_box(self.selected_file, 'black')
+        cfg_writer.update_path(self.selected_file)
 
     def process_input(self, event):
         """
