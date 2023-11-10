@@ -18,3 +18,7 @@ viewmodel_offset_x
 viewmodel_offset_y
 viewmodel_offset_z
 volume
+fps_max
+cl_showfps
+cl_crosshair_friendly_warning
+cl_crosshaircolor_alpha

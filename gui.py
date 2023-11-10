@@ -28,7 +28,7 @@ class Gui:
         self.ok_button = tk.Button(self.root, text="Ok", width=20)
         self.ok_button.bind("<Button>", self.process_input)
 
-        self.info_box = tk.Text(self.root, height=20, width=80)
+        self.info_box = tk.Text(self.root, height=15, width=65, state=DISABLED)
         self.add_text_to_info_box(cfg_writer.init_path(), 'black')
         self.info_box.tag_config('gray', foreground='gray')
         self.info_box.tag_config('black', foreground='black')
@@ -47,11 +47,12 @@ class Gui:
         :param tag: Color of the text
         :return: nothing
         """
-
+        self.info_box.config(state=NORMAL)
         # Change the color of older text to gray
         self.info_box.replace("0.0", tkinter.END, self.info_box.get("0.0", tkinter.END), 'gray')
         # Insert new text
         self.info_box.insert(tkinter.END, text + '\n', tag)
+        self.info_box.config(state=DISABLED)
 
 
     def get_folder_name(self):

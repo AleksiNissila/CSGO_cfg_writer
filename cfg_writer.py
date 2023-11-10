@@ -84,7 +84,7 @@ def process_input_commands(config_file_path, input_cmd_full, info_box, app):
     try:
         input_cmds, input_values = zip(*input_split)
     except:
-        print_info("Bad input", info_box)
+        print_info("Bad input", info_box, app)
         return
 
 
@@ -105,8 +105,8 @@ def process_input_commands(config_file_path, input_cmd_full, info_box, app):
                         line_old = line
                         line = f"{input_cmds[cmd_i]} {input_values[cmd_i]}\n"
                         msg = 'Line Number: ' + str(line_number)
-                        print_info(msg, info_box)
-                        print_info(f"{line_old.strip()} changed to -> {line.strip()}\n", info_box)
+                        print_info(msg, info_box, app)
+                        print_info(f"{line_old.strip()} changed to -> {line.strip()}\n", info_box, app)
                         update_cmd_list(input_cmds, app)
 
                     else:
@@ -116,9 +116,9 @@ def process_input_commands(config_file_path, input_cmd_full, info_box, app):
             cfg_out.write(line)
 
     if num_changed == 0:
-        print_info("No matches found", info_box)
+        print_info("No matches found", info_box, app)
     if val_not_changed != 0:
-        print_info("Some commands were found, but no changes were made", info_box)
+        print_info("Some commands were found, but no changes were made", info_box, app)
 
     # Rename files
     backup_file_path = cfg_loc / 'autoexec_old.cfg'
@@ -131,21 +131,22 @@ def process_input_commands(config_file_path, input_cmd_full, info_box, app):
         temp_file_path.rename(config_file_path)
         # Delete the backup file
         backup_file_path.unlink()
-        print_info("Configuration file updated successfully!", info_box)
+        print_info("Configuration file updated successfully!", info_box, app)
     except Exception as e:
-        print_info(f"Error occurred during file operations: {str(e)}", info_box)
+        print_info(f"Error occurred during file operations: {str(e)}", info_box, app)
 
 
 
 
-def print_info(msg, info_box):
+def print_info(msg, info_box, app):
     """
     Print information about the changes made for the user
     :param msg: Message to be printed
     :param info_box: GUI element to which message is printed to
     :return: nothing
     """
-    info_box.insert(tk.END, msg + '\n', 'black')
+    app.add_text_to_info_box(msg, 'black')
+    #info_box.insert(tk.END, msg + '\n', 'black')
     info_box.see('end')
 
 def sort_cmds():
