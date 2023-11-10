@@ -131,13 +131,9 @@ def process_input_commands(config_file_path, input_cmd_full, info_box, app):
 
     try:
         # Backup the original file
-        print("135_1 config_file_path: ", config_file_path)
         config_file_path.rename(backup_file_path)
-        print("135_2 config_file_path: ", config_file_path)
         # Rename the temporary file
-        print("139_1 temp_file_path: ", temp_file_path)
         temp_file_path.rename(config_file_path)
-        print("139_2 temp_file_path: ", temp_file_path)
         # Delete the backup file
         backup_file_path.unlink()
         print_info("Configuration file updated successfully!", info_box, app)
